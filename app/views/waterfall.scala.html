@@ -1,0 +1,41 @@
+@(waterfall : Waterfall)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Waterfall</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
+        <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
+    </head>
+    <body class="bg-info">
+        @navbar.render
+        <div class="container">
+            <h1 class="text-center display-3"><strong>@waterfall.getWaterfallName</strong></h1>
+            <table class="table table-bordered table-striped table-dark">
+                <thead class="bg-secondary">
+                    <tr>
+                        <th scope="col">Height(ft)</th>
+                        <th scope="col">Coordinates(Latitude, Longitude)</th>
+                        <th scope="col">Parking Coordinates(Latitude, Longitude)</th>
+                        <th scope="col">GPS Required</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@waterfall.getHeight</td>
+                        <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
+                        <td>@waterfall.getParkingLatitude, @waterfall.getParkingLongitude</td>
+                        <td>@waterfall.isGPSRequired</td>
+                        <td>@waterfall.getDescription</td>
+                    </tr>
+                </tbody>
+            </table>
+            <td><a href="/waterfallpicture/@waterfall.getWaterfallId"><img src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200"></a></td>
+        </div>
+        <div id="mapid" style="width: 600px; height: 400px;"></div>
+        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallmap.js" data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude"></script>
+    </body>
+</html>

@@ -9,6 +9,15 @@ POST    /                           controllers.TestController.postTest
 GET     /test                       controllers.TestController.getTest
 POST    /test                       controllers.TestController.postTest
 
+GET     /waterfall/:id              controllers.WaterfallController.getWaterfall(id:Integer)
+GET     /waterfalls                 controllers.WaterfallController.getWaterfalls
+GET     /waterfallsearch            controllers.WaterfallController.getWaterfallSearch
+GET     /waterfallpicture/:id       controllers.WaterfallController.getPicture(id:Integer)
+GET     /home                       controllers.WaterfallController.getHome
+
+GET     /login                      controllers.SessionController.getLogin
+POST    /login                      controllers.SessionController.postLogin
+
 GET     /testdb                       controllers.TestController.getTestDb
 POST    /testdb                       controllers.TestController.postTestDb
 

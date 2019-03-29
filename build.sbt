@@ -1,4 +1,4 @@
-name := """final-project-starter"""
+name := """YonderWander"""
 
 version := "1.0-SNAPSHOT"
 
@@ -12,6 +12,7 @@ libraryDependencies += guice
 
 //GUI
 libraryDependencies += "org.webjars" % "bootstrap" % "4.3.1"
+libraryDependencies += "org.webjars.bower" % "leaflet" % "1.4.0"
 
 //Database
 libraryDependencies += javaJpa

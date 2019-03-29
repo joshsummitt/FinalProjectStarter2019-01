@@ -1,0 +1,32 @@
+@(waterfalls : List[Waterfall])
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <titleName>Waterfall Search</titleName>
+    </head>
+    <body>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+            <input type="submit" value="Search">
+        </form>
+        <table>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Title</th>
+            </tr>
+            @for(waterfall<-waterfalls){
+            <tr>
+                <td>@waterfall.getWaterfallName</td>
+                <td>@waterfall.getHeight</td>
+                <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
+                <td>@waterfall.getParkingLatitude, @waterfall.getParkingLongitude</td>
+                <td>@waterfall.isGPSRequired</td>
+                <td>@waterfall.getDescription</td>
+            </tr>
+            }
+        </table>
+    </body>
+</html>
