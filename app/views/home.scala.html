@@ -1,14 +1,16 @@
-@(mapInfo : Html)
+@(notCompleted : Html , completed : Html, isLoggedIn : Boolean, loggedInUser : Integer)
 @doctype.render
 <html>
     <head>
         <title>Leaflet Demo</title>
         <meta charset="utf-8" />
+        @bootstrap.render
         <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
         <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
     </head>
     <body>
+        @navbar.render(isLoggedIn, loggedInUser)
         <div id="mapid" style="width: 600px; height: 400px;"></div>
-        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsmap.js" data-mapInfo='@mapInfo'></script>
+        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsmap.js" data-completed='@completed' data-notCompleted='@notCompleted'></script>
     </body>
 </html>

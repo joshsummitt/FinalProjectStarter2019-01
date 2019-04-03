@@ -3,7 +3,6 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Waterfall")
@@ -12,26 +11,27 @@ public class MapInfo
     @Id
     private int waterfallId;
 
-    private BigDecimal fallLatitude;
-    private BigDecimal fallLongitude;
+    private double fallLatitude;
+    private double fallLongitude;
     private String waterfallName;
+    private int height;
 
-    public BigDecimal getFallLatitude()
+    public double getFallLatitude()
     {
         return fallLatitude;
     }
 
-    public void setFallLatitude(BigDecimal fallLatitude)
+    public void setFallLatitude(double fallLatitude)
     {
         this.fallLatitude = fallLatitude;
     }
 
-    public BigDecimal getFallLongitude()
+    public double getFallLongitude()
     {
         return fallLongitude;
     }
 
-    public void setFallLongitude(BigDecimal fallLongitude)
+    public void setFallLongitude(double fallLongitude)
     {
         this.fallLongitude = fallLongitude;
     }
@@ -54,5 +54,15 @@ public class MapInfo
     public void setWaterfallName(String waterfallName)
     {
         this.waterfallName = waterfallName;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public void setHeight(int height)
+    {
+        this.height = height;
     }
 }

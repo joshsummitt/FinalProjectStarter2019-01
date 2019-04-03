@@ -57,4 +57,12 @@ public class TestController extends Controller
 
         return redirect("/testdb");
     }
+
+    @Transactional(readOnly = true)
+    public Result getDemo()
+    {
+        return ok(views.html.demo.render());
+    }
+
+
 }

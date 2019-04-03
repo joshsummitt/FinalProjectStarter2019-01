@@ -1,0 +1,53 @@
+@(waterfall : Waterfall, waterfallsInRange : List[MapInfo], mapInfo : Html, isLoggedIn : Boolean, loggedInUser : Integer)
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Waterfall</title>
+        @bootstrap.render
+        <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
+        <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
+    </head>
+    <body class="bg-info">
+        @navbar.render(isLoggedIn, loggedInUser)
+        <div class="container">
+            <h1 class="text-center display-3"><strong>@waterfall.getWaterfallName</strong></h1>
+            <table class="table table-bordered table-striped table-dark">
+                <thead class="bg-secondary">
+                    <tr>
+                        <th scope="col">Height(ft)</th>
+                        <th scope="col">Coordinates(Latitude, Longitude)</th>
+                        <th scope="col">Parking Coordinates(Latitude, Longitude)</th>
+                        <th scope="col">GPS Required</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@waterfall.getHeight</td>
+                        <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
+                        <td>@waterfall.getParkingLatitude, @waterfall.getParkingLongitude</td>
+                        <td>@waterfall.isGPSRequired</td>
+                        <td>@waterfall.getDescription</td>
+                    </tr>
+                </tbody>
+            </table>
+            <td><a href="/waterfallpicture/@waterfall.getWaterfallId"><img src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200"></a></td>
+        </div>
+        <div id="mapid" style="width: 600px; height: 400px;"></div>
+        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsinrange.js" data-mapInfo='@mapInfo' data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude" data-name="@waterfall.getWaterfallName"></script>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Height</th>
+            </tr>
+            @for(waterfallInrange<-waterfallsInRange){
+            <tr>
+                <td><a href="/waterfall/@waterfall.getWaterfallId">@waterfallInrange.getWaterfallName</a></td>
+                <td>@waterfallInrange.getHeight</td>
+
+            </tr>
+            }
+        </table>
+    </body>
+</html>

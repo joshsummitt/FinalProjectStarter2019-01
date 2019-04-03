@@ -13,3 +13,25 @@ VALUES (4, 'Hobo Falls', 27, 35.68090, -93.33400, null, null, 0, 'Most folks was
 
 INSERT INTO Waterfall(WaterfallId, WaterfallName, Height, FallLatitude, FallLongitude, ParkingLatitude, ParkingLongitude, GPSRequired, Description, Picture)
 VALUES (5, 'Lacey Creek Falls', 45, 35.15067, -93.68587, -35.14592, 93.68852, 1, 'You can see this waterfall on the south slope of Mt. Magazine in the winter from teh highway far below, but it looks much better when you get up close.', LOAD_FILE('C:\\Program Files\\MariaDB 10.3\\Pictures\\LaceyCreekFalls.jpg'));
+
+
+
+
+
+
+
+
+INSERT INTO UserAccount(UserAccountId, , UserFirstName, UserLastName, Password, PasswordSalt)
+VALUES(1, "Josh", "Summitt", "12345", "12345")
+
+
+
+INSERT INTO CompletedWaterfall(UserAccountId, WaterfallId, Ranking, Comment)
+VALUES(1, 2, 4, "Worth the trip!")
+
+INSERT INTO CompletedWaterfall(UserAccountId, WaterfallId, Ranking, Comment)
+VALUES(1, 1, 5, "Best waterfall in the state")
+
+INSERT INTO CompletedWaterfall(UserAccountId, WaterfallId, Ranking, Comment)
+VALUES(1, 3, 2, "Don't go unless there have been recent rains")
+

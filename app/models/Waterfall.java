@@ -14,8 +14,8 @@ public class Waterfall
 
     private String waterfallName;
     private int height;
-    private BigDecimal fallLatitude;
-    private BigDecimal fallLongitude;
+    private double fallLatitude;
+    private double fallLongitude;
     private BigDecimal parkingLatitude;
     private BigDecimal parkingLongitude;
     private boolean GPSRequired;
@@ -52,22 +52,22 @@ public class Waterfall
         this.height = height;
     }
 
-    public BigDecimal getFallLatitude()
+    public double getFallLatitude()
     {
         return fallLatitude;
     }
 
-    public void setFallLatitude(BigDecimal fallLatitude)
+    public void setFallLatitude(double fallLatitude)
     {
         this.fallLatitude = fallLatitude;
     }
 
-    public BigDecimal getFallLongitude()
+    public double getFallLongitude()
     {
         return fallLongitude;
     }
 
-    public void setFallLongitude(BigDecimal fallLongitude)
+    public void setFallLongitude(double fallLongitude)
     {
         this.fallLongitude = fallLongitude;
     }

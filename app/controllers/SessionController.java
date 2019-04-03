@@ -1,11 +1,10 @@
 package controllers;
 
-import models.Waterfall;
+import models.UserAccount;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
-import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -29,25 +28,31 @@ public class SessionController extends BaseController
         return ok(views.html.login.render(""));
     }
 
+    public Result getLogout()
+    {
+        logout();
+        return redirect("/home");
+    }
+
     @Transactional(readOnly = true)
     public Result postLogin()
     {
         DynamicForm form = formFactory.form().bindFromRequest();
         String username = form.get("username");
 
-        String sql = "SELECT w FROM Waterfall w WHERE waterfallName = :username";
-        TypedQuery<Waterfall> query = db.em().createQuery(sql, Waterfall.class);
+        String sql = "SELECT u FROM UserAccount u WHERE username = :username";
+        TypedQuery<UserAccount> query = db.em().createQuery(sql, UserAccount.class);
         query.setParameter("username", username);
 
-        List<Waterfall> waterfalls = query.getResultList();
+        List<UserAccount> users = query.getResultList();
 
         Result result;
 
-        if(waterfalls.size() == 1)
+        if(users.size() == 1)
         {
-            Waterfall waterfall = waterfalls.get(0);
-            result = redirect("/waterfall/1");
-            login(waterfall);
+            UserAccount user = users.get(0);
+            result = redirect("/home");
+            login(user);
         }
         else
         {

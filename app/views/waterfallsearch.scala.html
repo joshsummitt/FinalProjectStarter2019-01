@@ -1,4 +1,4 @@
-@(waterfalls : List[Waterfall])
+@(waterfalls : List[Waterfall], isLoggedIn : Boolean)
 @doctype.render
 <html lang="en">
     <head>
@@ -13,16 +13,17 @@
         </form>
         <table>
             <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Title</th>
+                <th>Name</th>
+                <th>Height</th>
+                <th>Location</th>
+                <th>GPS Required</th>
+                <th>Description</th>
             </tr>
             @for(waterfall<-waterfalls){
             <tr>
-                <td>@waterfall.getWaterfallName</td>
+                <td><a href="/waterfall/@waterfall.getWaterfallId">@waterfall.getWaterfallName</a></td>
                 <td>@waterfall.getHeight</td>
                 <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
-                <td>@waterfall.getParkingLatitude, @waterfall.getParkingLongitude</td>
                 <td>@waterfall.isGPSRequired</td>
                 <td>@waterfall.getDescription</td>
             </tr>

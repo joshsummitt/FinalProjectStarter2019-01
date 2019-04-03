@@ -1,0 +1,18 @@
+@(waterfallId : Integer)
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <titleName>New Review</titleName>
+    </head>
+    <body>
+        <form method="post">
+            <p>New Review</p>
+            @helper.CSRF.formField
+            <input type="text" name="ranking" placeholder="Rating out of 5">
+            <input type="text" name="comment" placeholder="Review">
+            <input type="hidden" name="waterfallId" value="@waterfallId">
+            <input type="submit" value="Save">
+        </form>
+    </body>
+</html>

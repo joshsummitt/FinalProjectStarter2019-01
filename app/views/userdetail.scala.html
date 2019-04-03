@@ -1,0 +1,50 @@
+@(user : UserAccount, completedWaterfalls : List[CompletedWaterfallDetail], isLoggedIn : Boolean)
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Waterfall</title>
+        @bootstrap.render
+        <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
+        <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
+    </head>
+    <body class="bg-info">
+        @navbar.render(isLoggedIn, user.getUserAccountId)
+        <div class="container">
+            <h1 class="text-center display-3"><strong>User Details</strong></h1>
+            <table class="table table-bordered table-striped table-dark">
+                <thead class="bg-secondary">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@user.getUsername</td>
+                        <td>@user.getUserFirstName @user.getUserLastName</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1 class="text-center display-5"><strong>User's Reviews</strong></h1>
+            <table class="table table-bordered table-striped table-dark">
+                <thead class="bg-secondary">
+                    <tr>
+                        <th scope="col">Waterfall Name</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(completedWaterfall<-completedWaterfalls){
+                    <tr>
+                        <td>@completedWaterfall.getWaterfallName</td>
+                        <td>@completedWaterfall.getRanking</td>
+                        <td>@completedWaterfall.getComment</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

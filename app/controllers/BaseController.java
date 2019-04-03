@@ -1,5 +1,6 @@
 package controllers;
 
+import models.UserAccount;
 import models.Waterfall;
 import play.mvc.Controller;
 import views.html.waterfall;
@@ -10,9 +11,9 @@ public class BaseController extends Controller
 {
     private String LOGGED_IN_USER = "LoggedInUserId";
 
-    public void login(Waterfall waterfall)
+    public void login(UserAccount user)
     {
-        session().put(LOGGED_IN_USER, "" + waterfall.getWaterfallId());
+        session().put(LOGGED_IN_USER, "" + user.getUserAccountId());
     }
 
     public void logout()
