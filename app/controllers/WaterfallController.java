@@ -84,7 +84,7 @@ public class WaterfallController extends BaseController
         query.setParameter("name", name);
         List<Waterfall> waterfalls = query.getResultList();
 
-        return ok(views.html.waterfallsearch.render(waterfalls, isLoggedIn()));
+        return ok(views.html.waterfallsearch.render(waterfalls, isLoggedIn(), loggedInUserId()));
     }
 
     @Transactional(readOnly = true)
@@ -140,6 +140,26 @@ public class WaterfallController extends BaseController
         TypedQuery<MapInfo> query2 = db.em().createQuery("SELECT w FROM MapInfo w", MapInfo.class);
         List<MapInfo> waterfalls = query2.getResultList();
 
+        TypedQuery<CompletedWaterfallDetail> query3 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE w.waterfallId = :waterfallId", CompletedWaterfallDetail.class);
+        query3.setParameter("waterfallId", currentWaterfallId);
+        List<CompletedWaterfallDetail> reviews = query3.getResultList();
+
+        boolean canReview = false;
+        int reviewCount = 0;
+
+        for(CompletedWaterfallDetail review : reviews)
+        {
+            if(isLoggedIn() && loggedInUserId() == review.getUserAccountId())
+            {
+                reviewCount++;
+            }
+        }
+
+        if(reviewCount == 0 && isLoggedIn())
+        {
+            canReview = true;
+        }
+
         for(MapInfo waterfall : waterfalls)
         {
             if(waterfall.getWaterfallId() != currentWaterfallId && distance(currentWaterfall.getFallLatitude(), currentWaterfall.getFallLongitude(), waterfall.getFallLatitude(), waterfall.getFallLongitude()) <= n)
@@ -149,7 +169,7 @@ public class WaterfallController extends BaseController
         }
 
         JsonNode json = Json.toJson(waterfallsInRange);
-        return ok(views.html.waterfallsinrange.render(currentWaterfall, waterfallsInRange, new Html(Json.stringify(json)), isLoggedIn(), loggedInUserId()));
+        return ok(views.html.waterfallsinrange.render(currentWaterfall, reviews, isLoggedIn(), loggedInUserId(), canReview, new Html(Json.stringify(json))));
     }
 
     private static double distance(double lat1, double lon1, double lat2, double lon2)

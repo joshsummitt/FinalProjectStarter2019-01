@@ -29,7 +29,6 @@ GET    /logout                      controllers.SessionController.getLogout
 
 GET     /testdb                     controllers.TestController.getTestDb
 POST    /testdb                     controllers.TestController.postTestDb
-GET     /demo                     controllers.TestController.getDemo
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

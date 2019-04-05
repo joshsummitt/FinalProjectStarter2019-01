@@ -1,4 +1,4 @@
-   var mymap = L.map('mapid').setView([35.12148, -92.93410], 8);
+   var mymap = L.map('mapid').setView([35.68090, -93.33400], 8);
 
    var completed = JSON.parse(document.getElementById("map").getAttribute("data-completed"));
    var notCompleted = JSON.parse(document.getElementById("map").getAttribute("data-notCompleted"));

@@ -1,33 +1,44 @@
-@(waterfalls : List[Waterfall], isLoggedIn : Boolean)
+@(waterfalls : List[Waterfall], isLoggedIn : Boolean, loggedInUser : Integer)
 @doctype.render
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <titleName>Waterfall Search</titleName>
+        <title>Browse Waterfalls</title>
+        <link rel="stylesheet" href="assets/stylesheets/searchbar.css">
+        @bootstrap.render
+
     </head>
     <body>
-        <form>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name">
-            <input type="submit" value="Search">
-        </form>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Height</th>
-                <th>Location</th>
-                <th>GPS Required</th>
-                <th>Description</th>
-            </tr>
+        @navbar.render(isLoggedIn, loggedInUser)
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
+        <div class="container bg-light">
+            <div class="row">
+                <div class="container h-100 mt-4 mb-4">
+                    <div class="d-flex justify-content-center h-100">
+                        <form>
+                            <div class="searchbar">
+                                <input class="search_input" type="text" name="name" placeholder="Search...">
+                                <a class="search_icon"><img src="/assets/images/searchIcon.png" width="30px"></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             @for(waterfall<-waterfalls){
-            <tr>
-                <td><a href="/waterfall/@waterfall.getWaterfallId">@waterfall.getWaterfallName</a></td>
-                <td>@waterfall.getHeight</td>
-                <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
-                <td>@waterfall.isGPSRequired</td>
-                <td>@waterfall.getDescription</td>
-            </tr>
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <a href="/waterfallpicture/@waterfall.getWaterfallId"><img
+                            src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200" class="mb-4"></a>
+                </div>
+                <div class="col-8">
+                    <a class="text-primary">@waterfall.getWaterfallName</a>
+                    <p>@waterfall.getDescription</p>
+                    <a class="btn btn-primary btn-md" href="/waterfall/@waterfall.getWaterfallId" role="button">Learn
+                        More</a>
+                </div>
+            </div>
             }
-        </table>
+        </div>
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
     </body>
 </html>

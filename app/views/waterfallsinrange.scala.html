@@ -1,4 +1,4 @@
-@(waterfall : Waterfall, waterfallsInRange : List[MapInfo], mapInfo : Html, isLoggedIn : Boolean, loggedInUser : Integer)
+@(waterfall : Waterfall, reviews : List[CompletedWaterfallDetail], isLoggedIn : Boolean, loggedInUser : Integer, canReview : Boolean, mapInfo : Html)
 @doctype.render
 <html lang="en">
     <head>
@@ -6,48 +6,70 @@
         <title>Waterfall</title>
         @bootstrap.render
         <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
+        <link rel="stylesheet" href="/assets/stylesheets.comments.css">
         <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
     </head>
-    <body class="bg-info">
+    <body>
         @navbar.render(isLoggedIn, loggedInUser)
-        <div class="container">
-            <h1 class="text-center display-3"><strong>@waterfall.getWaterfallName</strong></h1>
-            <table class="table table-bordered table-striped table-dark">
-                <thead class="bg-secondary">
-                    <tr>
-                        <th scope="col">Height(ft)</th>
-                        <th scope="col">Coordinates(Latitude, Longitude)</th>
-                        <th scope="col">Parking Coordinates(Latitude, Longitude)</th>
-                        <th scope="col">GPS Required</th>
-                        <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@waterfall.getHeight</td>
-                        <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
-                        <td>@waterfall.getParkingLatitude, @waterfall.getParkingLongitude</td>
-                        <td>@waterfall.isGPSRequired</td>
-                        <td>@waterfall.getDescription</td>
-                    </tr>
-                </tbody>
-            </table>
-            <td><a href="/waterfallpicture/@waterfall.getWaterfallId"><img src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200"></a></td>
-        </div>
-        <div id="mapid" style="width: 600px; height: 400px;"></div>
-        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsinrange.js" data-mapInfo='@mapInfo' data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude" data-name="@waterfall.getWaterfallName"></script>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Height</th>
-            </tr>
-            @for(waterfallInrange<-waterfallsInRange){
-            <tr>
-                <td><a href="/waterfall/@waterfall.getWaterfallId">@waterfallInrange.getWaterfallName</a></td>
-                <td>@waterfallInrange.getHeight</td>
+        <div class="container bg-light">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-center">@waterfall.getWaterfallName</h1>
+                    <table class="table table-dark">
+                        <thead class="bg-secondary">
+                            <tr class="text-center">
+                                <th>Height(ft)</th>
+                                <th>Coordinates</th>
+                                <th>GPS</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@waterfall.getHeight</td>
+                                <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
+                                @if(waterfall.isGPSRequired){
+                                <td>Needed</td>
+                                }else{
+                                <td>Not Needed</td>
+                                }
+                                <td>@waterfall.getDescription</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div id="mapid" style="width: 600px; height: 400px;"></div>
+                    <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsinrange.js" data-mapInfo='@mapInfo' data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude" data-name="@waterfall.getWaterfallName"></script>
+                </div>
+                <div class="col-5">
+                    `<a href="/waterfallpicture/@waterfall.getWaterfallId"><img
+                        src="/waterfallpicture/@waterfall.getWaterfallId" width="400px"></a>
+                </div>
+            </div>
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    Product Reviews
+                </div>
+                <div class="card-body">
+                    @for(review<-reviews){
+                    <p>@review.getComment</p>
+                    <small class="text-muted">Posted by @review.getUsername</small>
+                    <small class="text-muted">Rated @review.getRanking</small>
+                    }
+                    <hr>
+                    @if(canReview){
+                    <form method = "get" action="/commentadd">
+                        <input type="submit" class="btn btn-primary" value="Review This Waterfall">
+                        <input type="hidden" name="waterfallId" value="@waterfall.getWaterfallId">
+                    </form>
+                    }
+                </div>
+            </div>
 
-            </tr>
-            }
-        </table>
+        </div>
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
     </body>
 </html>

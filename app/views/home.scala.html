@@ -3,14 +3,33 @@
 <html>
     <head>
         <title>Leaflet Demo</title>
-        <meta charset="utf-8" />
         @bootstrap.render
+        <meta charset="utf-8" />
         <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
         <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
     </head>
     <body>
         @navbar.render(isLoggedIn, loggedInUser)
-        <div id="mapid" style="width: 600px; height: 400px;"></div>
-        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsmap.js" data-completed='@completed' data-notCompleted='@notCompleted'></script>
-    </body>
+        <img src="/assets/images/cover2.jpg" width="100%">
+        <div class="container" align="center">
+            <div class="row">
+                <div class="col-12">
+                    <p> </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>USE OUR INTERACTIVE MAP TO EXPLORE LEARN ABOUT THE WATERFALLS YOU CAN EXPLORE</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="mapid" style="width: 600px; height: 400px;"></div>
+                    <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsmap.js" data-completed='@completed' data-notCompleted='@notCompleted'></script>
+                </div>
+            </div>
+        </div>
+        <p> </p>
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
+   </body>
 </html>

@@ -4,31 +4,27 @@
     <head>
         <meta charset="UTF-8">
         <title>Waterfalls</title>
-        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
-        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+        @bootstrap.render
     </head>
-    <body class="bg-info">
+    <body>
         @navbar.render(isLoggedIn, loggedInUser)
-        <div class="container">
-            <h1 class="text-center display-3"><strong>Waterfalls</strong></h1>
-            <table class="table table-bordered table-striped table-dark">
-                <thead class="bg-secondary">
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Height(ft)</th>
-                        <th scope="col">Gallery</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for(waterfall<-waterfalls){
-                    <tr>
-                        <td><a href="/waterfall/@waterfall.getWaterfallId">@waterfall.getWaterfallName</a></td>
-                        <td>@waterfall.getHeight</td>
-                        <td><a href="/waterfallpicture/@waterfall.getWaterfallId"><img src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200"></a></td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
+        <div class="container bg-light">
+            @for(waterfall<-waterfalls){
+            <div class="row justify-content-center mt-4">
+                <div class="col-4">
+                    <a href="/waterfallpicture/@waterfall.getWaterfallId"><img
+                            src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200" class="mb-4"></a>
+                </div>
+                <div class="col-8">
+                    <a class="text-primary">@waterfall.getWaterfallName</a>
+                    <p>@waterfall.getDescription</p>
+                    <a class="btn btn-primary btn-md" href="/waterfall/@waterfall.getWaterfallId" role="button">Learn
+                        More</a>
+                </div>
+            </div>
+            }
         </div>
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
     </body>
 </html>

@@ -14,6 +14,8 @@ libraryDependencies += guice
 libraryDependencies += "org.webjars" % "bootstrap" % "4.3.1"
 libraryDependencies += "org.webjars.bower" % "leaflet" % "1.4.0"
 
+libraryDependencies += "org.webjars" % "font-awesome" % "5.8.1"
+
 //Database
 libraryDependencies += javaJpa
 libraryDependencies += javaJdbc

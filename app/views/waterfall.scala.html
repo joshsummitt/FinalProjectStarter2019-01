@@ -6,64 +6,82 @@
         <title>Waterfall</title>
         @bootstrap.render
         <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
+        <link rel="stylesheet" href="/assets/stylesheets.comments.css">
         <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
     </head>
-    <body class="bg-light">
+    <body>
         @navbar.render(isLoggedIn, loggedInUser)
-        <div class="container">
-            <h1 class="text-center display-3"><strong>@waterfall.getWaterfallName</strong></h1>
-            <table class="table  table-dark">
-                <thead class="bg-secondary">
-                    <tr>
-                        <th scope="col">Height(ft)</th>
-                        <th scope="col">Coordinates(Latitude, Longitude)</th>
-                        <th scope="col">GPS Required</th>
-                        <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@waterfall.getHeight</td>
-                        <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
-                        <td>@waterfall.isGPSRequired</td>
-                        <td>@waterfall.getDescription</td>
-                    </tr>
-                </tbody>
-            </table>
-            <td><a href="/waterfallpicture/@waterfall.getWaterfallId"><img src="/waterfallpicture/@waterfall.getWaterfallId" width="200" height="200"></a></td>
-            <h1 class="text-center display-5"><strong>Reviews</strong></h1>
-            <table class="table table-bordered table-striped table-dark">
-                <thead class="bg-secondary">
-                    <tr>
-                        <th scope="col">Author</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Comments</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div class="container bg-light">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-center">@waterfall.getWaterfallName</h1>
+                    <table class="table table-dark">
+                        <thead class="bg-secondary">
+                            <tr class="text-center">
+                                <th>Height(ft)</th>
+                                <th>Coordinates</th>
+                                <th>GPS</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@waterfall.getHeight</td>
+                                <td>@waterfall.getFallLatitude, @waterfall.getFallLongitude</td>
+                                @if(waterfall.isGPSRequired){
+                                <td>Needed</td>
+                                }else{
+                                <td>Not Needed</td>
+                                }
+                                <td>@waterfall.getDescription</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <form action="/waterfallsinrange">
+                        <label for="distance">Enter distance in miles to show waterfalls in the area</label>
+                        <input type="number" name="distance" id="distance">
+                        <input type="hidden" name="id" value="@waterfall.getWaterfallId">
+                        <input type="submit" value="Search">
+                    </form>
+                    <div id="mapid" style="width: 600px; height: 400px;"></div>
+                    <script id="map" type="text/javascript" src="/assets/javascripts/waterfallmap.js"
+                            data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude"></script>
+                </div>
+                <div class="col-5">
+                    `<a href="/waterfallpicture/@waterfall.getWaterfallId"><img
+                        src="/waterfallpicture/@waterfall.getWaterfallId" width="400px"></a>
+                </div>
+            </div>
+
+
+
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    Product Reviews
+                </div>
+                <div class="card-body">
                     @for(review<-reviews){
-                    <tr>
-                        <td>@review.getUsername</td>
-                        <td>@review.getRanking</td>
-                        <td>@review.getComment</td>
-                    </tr>
+                    <p>@review.getComment</p>
+                    <small class="text-muted">Posted by @review.getUsername</small>
+                    <small class="text-muted">Rated @review.getRanking</small>
                     }
-                </tbody>
-            </table>
-            @if(canReview){
-            <form method="get" action="/commentadd">
-                <input type="submit" value="Review This Waterfall">
-                <input type="hidden" name="waterfallId" value="@waterfall.getWaterfallId">
-            </form>
-            }
+                    <hr>
+                    @if(canReview){
+                        <form method = "get" action="/commentadd">
+                            <input type="submit" class="btn btn-primary" value="Review This Waterfall">
+                            <input type="hidden" name="waterfallId" value="@waterfall.getWaterfallId">
+                        </form>
+                    }
+                </div>
+            </div>
+
+
+
         </div>
-        <div id="mapid" style="width: 600px; height: 400px;"></div>
-        <script id="map" type="text/javascript" src="/assets/javascripts/waterfallmap.js" data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude"></script>
-        <form action="/waterfallsinrange">
-            <label for="distance">Enter distance in miles to show waterfalls in the area</label>
-            <input type="number" name="distance" id="distance">
-            <input type="hidden" name="id" value="@waterfall.getWaterfallId">
-            <input type="submit" value="Search">
-        </form>
+        <img src="/assets/images/HawCreekCover.jpg" width="100%">
     </body>
 </html>

@@ -1,19 +1,55 @@
-@(message : String)
-@doctype.render
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Login</title>
-    </head>
-    <body>
-        <form method="post">
-            @helper.CSRF.formField
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Login">
-            <p>@message</p>
-        </form>
-        <form method="get" action="/useradd">
-            <input type="submit" value="Create Account">
-        </form>
-    </body>
+    @(message : String)
+    @doctype.render
+    <html>
+        <head>
+            <title>Login Page</title>
+            <!--Made with love by Mutiullah Samim -->
+
+            <!--Bootsrap 4 CDN-->
+            @bootstrap.render
+            @fontawesome.render
+            <!--Custom styles-->
+            <link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+        </head>
+        <body>
+            <form method = "post">
+                @helper.CSRF.formField
+                <div class="container">
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Sign In</h3>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" name = "username">
+                                    </div>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Password" name = "password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Login" class="btn float-right btn-primary login_btn">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <form method="get" action="/useradd">
+                                    <div class="d-flex justify-content-center links">
+                                        Don't have an account?
+                                        <a href="/useradd">Sign Up</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </body>
+    </html>

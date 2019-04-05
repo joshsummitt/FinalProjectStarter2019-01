@@ -1,7 +1,7 @@
 var lat = parseFloat(document.getElementById("map").getAttribute("data-lat"))
 var long = parseFloat(document.getElementById("map").getAttribute("data-long"))
 var thisName = document.getElementById("map").getAttribute("data-name")
-var mymap = L.map('mapid').setView([lat, long], 9);
+var mymap = L.map('mapid').setView([lat, long], 8);
 var mapInfo = JSON.parse(document.getElementById("map").getAttribute("data-mapInfo"));
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibHJmbHJmIiwiYSI6ImNqdG94bWQwdTQ4Mng0Ym11YW52MWZ5bnEifQ.lZEH9-1FD4H2KYhVZDIe4Q', {
@@ -15,7 +15,7 @@ id: 'mapbox.streets'
 var myIcon = L.icon({
    iconUrl: '/assets/images/greenMapPin.png',
    iconSize: [30, 38],
-   iconAnchor: [22, 94],
+   iconAnchor: [22, 45],
    popupAnchor: [-3, -76]
 });
 
