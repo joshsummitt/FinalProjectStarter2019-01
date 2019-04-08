@@ -21,7 +21,7 @@ GET     /useradd                    controllers.UserController.getUserAdd
 POST    /useradd                    controllers.UserController.postUserAdd
 
 GET     /commentadd                 controllers.WaterfallController.getCommentAdd
-POST    /commentadd                  controllers.WaterfallController.postCommentAdd
+POST    /waterfall/:id               controllers.WaterfallController.postGetWaterfall(id:Integer)
 
 GET     /login                      controllers.SessionController.getLogin
 POST    /login                      controllers.SessionController.postLogin

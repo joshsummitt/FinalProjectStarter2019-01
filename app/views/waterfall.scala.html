@@ -3,10 +3,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Waterfall</title>
+        <title>@waterfall.getWaterfallName</title>
         @bootstrap.render
         <link rel="stylesheet" href="/assets/lib/leaflet/dist/leaflet.css">
-        <link rel="stylesheet" href="/assets/stylesheets.comments.css">
+        <link rel="stylesheet" href="/assets/stylesheets/comments.css">
+
         <script src="/assets/lib/leaflet/dist/leaflet.js"></script>
     </head>
     <body>
@@ -47,39 +48,47 @@
                         <input type="hidden" name="id" value="@waterfall.getWaterfallId">
                         <input type="submit" value="Search">
                     </form>
-                    <div id="mapid" style="width: 600px; height: 400px;"></div>
+                    <div id="mapid" style="width: 600px; height: 350px;"></div>
                     <script id="map" type="text/javascript" src="/assets/javascripts/waterfallmap.js"
                             data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude"></script>
                 </div>
                 <div class="col-5">
                     `<a href="/waterfallpicture/@waterfall.getWaterfallId"><img
-                        src="/waterfallpicture/@waterfall.getWaterfallId" width="400px"></a>
+                        src="/waterfallpicture/@waterfall.getWaterfallId" width="450px"></a>
                 </div>
             </div>
-
-
-
             <div class="card card-outline-secondary my-4">
                 <div class="card-header">
-                    Product Reviews
+                    Reviews
                 </div>
                 <div class="card-body">
                     @for(review<-reviews){
                     <p>@review.getComment</p>
+                    <small class="text-muted">Rated @review.getRanking/5<br></small>
                     <small class="text-muted">Posted by @review.getUsername</small>
-                    <small class="text-muted">Rated @review.getRanking</small>
                     }
                     <hr>
-                    @if(canReview){
-                        <form method = "get" action="/commentadd">
-                            <input type="submit" class="btn btn-primary" value="Review This Waterfall">
-                            <input type="hidden" name="waterfallId" value="@waterfall.getWaterfallId">
-                        </form>
-                    }
                 </div>
             </div>
-
-
+            @if(canReview){
+            <form id="review-form"  method="post" class="mb-5">
+                @helper.CSRF.formField
+                <h2>Review This Waterfall</h2>
+                <h4>Your Rating:</h4>
+                <div class="form-group">
+                    <label for="name">Rate from 1 to 5</label>
+                    <input class="form-control" type="number" placeholder="Your Rating" name="ranking" id="name" value="">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="review">Your Review:</label>
+                    <textarea class="form-control" rows="10" placeholder="Your Review" name="comment"
+                              id="review"></textarea>
+                </div>
+                <input id="submitForm" type="submit" class="btn btn-primary">
+            </form>
+            }
+            <div id="review-container">
+            </div>
 
         </div>
         <img src="/assets/images/HawCreekCover.jpg" width="100%">

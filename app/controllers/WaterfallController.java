@@ -200,14 +200,13 @@ public class WaterfallController extends BaseController
     }
 
     @Transactional
-    public Result postCommentAdd()
+    public Result postGetWaterfall(Integer waterfallId)
     {
         CompletedWaterfall completedWaterfall = new CompletedWaterfall();
 
         DynamicForm form = formFactory.form().bindFromRequest();
 
         int userAccountId = loggedInUserId();
-        int waterfallId = Integer.parseInt(form.get("waterfallId"));
         int ranking = Integer.parseInt(form.get("ranking"));
         String comment = form.get("comment");
 
