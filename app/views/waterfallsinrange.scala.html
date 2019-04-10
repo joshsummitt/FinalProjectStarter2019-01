@@ -42,11 +42,12 @@
             <div class="row">
                 <div class="col-7">
                     <div id="mapid" style="width: 600px; height: 400px;"></div>
-                    <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsinrange.js" data-mapInfo='@mapInfo' data-lat="@waterfall.getFallLatitude" data-long="@waterfall.getFallLongitude" data-name="@waterfall.getWaterfallName"></script>
+                    <script id="map" type="text/javascript" src="/assets/javascripts/waterfallsinrange.js"
+                            data-mapInfo='@mapInfo' data-lat="@waterfall.getFallLatitude"
+                            data-long="@waterfall.getFallLongitude" data-name="@waterfall.getWaterfallName"></script>
                 </div>
                 <div class="col-5">
-                    `<a href="/waterfallpicture/@waterfall.getWaterfallId"><img
-                        src="/waterfallpicture/@waterfall.getWaterfallId" width="450px"></a>
+                    `<img src="/waterfallpicture/@waterfall.getWaterfallId" width="450px">
                 </div>
             </div>
             <div class="card card-outline-secondary my-4">
@@ -55,13 +56,13 @@
                 </div>
                 <div class="card-body">
                     @for(review<-reviews){
-                    <p>@review.getComment</p>
                     <small class="text-muted">Posted by @review.getUsername</small>
+                    <p>@review.getComment</p>
                     <small class="text-muted">Rated @review.getRanking</small>
-                    }
                     <hr>
+                    }
                     @if(canReview){
-                    <form method = "get" action="/commentadd">
+                    <form method="get" action="/commentadd">
                         <input type="submit" class="btn btn-primary" value="Review This Waterfall">
                         <input type="hidden" name="waterfallId" value="@waterfall.getWaterfallId">
                     </form>

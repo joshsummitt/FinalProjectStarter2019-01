@@ -14,8 +14,9 @@ public class CompletedWaterfallDetail
     private int ranking;
     private String comment;
     private String username;
+    private int waterfallId;
 
-    public CompletedWaterfallDetail(int completedWaterfallId, int userAccountId, String waterfallName, int ranking, String comment, String username)
+    public CompletedWaterfallDetail(int completedWaterfallId, int userAccountId, String waterfallName, int ranking, String comment, String username, int waterfallId)
     {
         this.completedWaterfallId = completedWaterfallId;
         this.userAccountId = userAccountId;
@@ -23,6 +24,7 @@ public class CompletedWaterfallDetail
         this.ranking = ranking;
         this.comment = comment;
         this.username = username;
+        this.waterfallId = waterfallId;
     }
 
     public int getCompletedWaterfallId()
@@ -53,5 +55,10 @@ public class CompletedWaterfallDetail
     public String getUsername()
     {
         return username;
+    }
+
+    public int getWaterfallId()
+    {
+        return waterfallId;
     }
 }

@@ -63,11 +63,11 @@
                 </div>
                 <div class="card-body">
                     @for(review<-reviews){
+                    <small class="text-muted">Reviewed by @review.getUsername</small>
                     <p>@review.getComment</p>
                     <small class="text-muted">Rated @review.getRanking/5<br></small>
-                    <small class="text-muted">Posted by @review.getUsername</small>
-                    }
                     <hr>
+                    }
                 </div>
             </div>
             @if(canReview){

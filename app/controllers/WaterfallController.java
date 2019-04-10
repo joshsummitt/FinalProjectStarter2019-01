@@ -35,7 +35,7 @@ public class WaterfallController extends BaseController
         query.setParameter("waterfallId", waterfallId);
         Waterfall waterfall = query.getSingleResult();
 
-        TypedQuery<CompletedWaterfallDetail> query2 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE w.waterfallId = :waterfallId", CompletedWaterfallDetail.class);
+        TypedQuery<CompletedWaterfallDetail> query2 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username, w.waterfallId) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE w.waterfallId = :waterfallId", CompletedWaterfallDetail.class);
         query2.setParameter("waterfallId", waterfallId);
         List<CompletedWaterfallDetail> reviews = query2.getResultList();
 
@@ -140,7 +140,7 @@ public class WaterfallController extends BaseController
         TypedQuery<MapInfo> query2 = db.em().createQuery("SELECT w FROM MapInfo w", MapInfo.class);
         List<MapInfo> waterfalls = query2.getResultList();
 
-        TypedQuery<CompletedWaterfallDetail> query3 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE w.waterfallId = :waterfallId", CompletedWaterfallDetail.class);
+        TypedQuery<CompletedWaterfallDetail> query3 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username, w.waterfallId) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE w.waterfallId = :waterfallId", CompletedWaterfallDetail.class);
         query3.setParameter("waterfallId", currentWaterfallId);
         List<CompletedWaterfallDetail> reviews = query3.getResultList();
 

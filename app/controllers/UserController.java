@@ -32,7 +32,7 @@ public class UserController extends BaseController
         query.setParameter("userAccountId", userAccountId);
         UserAccount user = query.getSingleResult();
 
-        TypedQuery<CompletedWaterfallDetail> query2 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE c.userAccountId = :userAccountId", CompletedWaterfallDetail.class);
+        TypedQuery<CompletedWaterfallDetail> query2 = db.em().createQuery("SELECT NEW CompletedWaterfallDetail(c.completedWaterfallId, c.userAccountId, w.waterfallName, c.ranking, c.comment, u.username, w.waterfallId) FROM Waterfall w JOIN CompletedWaterfall c ON w.waterfallId = c.waterfallId JOIN UserAccount u ON c.userAccountId = u.userAccountId WHERE c.userAccountId = :userAccountId", CompletedWaterfallDetail.class);
         query2.setParameter("userAccountId", userAccountId);
         List<CompletedWaterfallDetail> completedWaterfalls = query2.getResultList();
 

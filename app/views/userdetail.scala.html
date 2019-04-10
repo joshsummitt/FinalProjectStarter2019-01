@@ -38,7 +38,7 @@
                 <tbody>
                     @for(completedWaterfall<-completedWaterfalls){
                     <tr>
-                        <td><@completedWaterfall.getWaterfallName</td>
+                        <td><a href="/waterfall/@completedWaterfall.getWaterfallId">@completedWaterfall.getWaterfallName</a> </td>
                         <td>@completedWaterfall.getRanking</td>
                         <td>@completedWaterfall.getComment</td>
                     </tr>
